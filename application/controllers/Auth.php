@@ -13,12 +13,12 @@ class Auth extends CI_Controller
     public function index()
     {
         $this->goToDefaultPage();
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
 
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Login';
-            $this->load->view('auth/login', $data);
+            $this->load->view('auth/login-register', $data);
         } else {
             $this->_login();
         }
@@ -26,10 +26,10 @@ class Auth extends CI_Controller
 
     private function _login()
     {
-        $email = $this->input->post('email');
+        $username = $this->input->post('email');
         $password = $this->input->post('password');
 
-        $user = $this->db->get_where('user', ['email' => $email])->row_array();
+        $user = $this->db->get_where('user', ['email_user' => $username])->row_array();
 
         //jika usernya ada
         if ($user) {
@@ -41,7 +41,7 @@ class Auth extends CI_Controller
                     //get detail role
                     $role = $this->db->where('id_role', $user['id_role'])->get('user_role')->row()->role;
                     $data = [
-                        'email' => $user['email'],
+                        'email' => $user['email_user'],
                         'nama' => $user['nama_user'],
                         'id_user' => $user['id_user'],
                         'id_role' => $user['id_role'],
@@ -51,7 +51,7 @@ class Auth extends CI_Controller
                     $this->session->set_userdata($data);
                     //masuk ke user
                     if ($user['id_role'] == 1) {
-                        redirect('admin/admincontroller');
+                        redirect('coaches/home');
                     } else if ($user['id_role'] == 2) {
                         redirect('pengguna/penggunacontroller/index');
                     }
@@ -72,7 +72,7 @@ class Auth extends CI_Controller
     public function goToDefaultPage()
     {
         if ($this->session->userdata('id_role') == 1) {
-            redirect('admin/admincontroller');
+            redirect('coaches/home');
         } else if ($this->session->userdata('id_role') == 2) {
             redirect('pengguna/penggunacontroller');
         }
@@ -84,61 +84,50 @@ class Auth extends CI_Controller
     {
 
         $this->goToDefaultPage();
-        $this->form_validation->set_rules('name', 'Name', 'required|trim');
+        // $this->form_validation->set_rules('name', 'Name', 'required|trim');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
             'is_unique' => 'Email Ini Sudah Terdaftar!'
         ]);
-        $this->form_validation->set_rules(
-            'username',
-            'Username',
-            'min_length[4]',
-            'required|trim|max_length[30]',
-            [
-                'max_length' => 'Username tidak boleh lebih dari 30 huruf',
-                'min_length' => 'Username tidak boleh kurang dari 4 huruf'
-            ]
-        );
+        // $this->form_validation->set_rules(
+        //     'username',
+        //     'Username',
+        //     'min_length[4]',
+        //     'required|trim|max_length[30]',
+        //     [
+        //         'max_length' => 'Username tidak boleh lebih dari 30 huruf',
+        //         'min_length' => 'Username tidak boleh kurang dari 4 huruf'
+        //     ]
+        // );
         // $this->form_validation->set_rules('nik', 'NIK', 'required|trim|is_unique[user.nik]', [
         //     'is_unique' => 'NIK Ini Sudah Terdaftar!'
         // ]);
         $this->form_validation->set_rules(
             'password',
             'Password',
-            'required|trim|min_length[8]|matches[password2]',
-            ['matches' => 'Password Tidak Sama', 'min_length' => 'Password Terlalu Pendek Minimal 8 huruf/angka']
+            'required|trim|min_length[4]',
+            [
+                'min_length' => 'Password Terlalu Pendek Minimal 8 huruf/angka'
+            ]
         );
-        $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
 
         if ($this->form_validation->run() == false) {
 
             $data['title'] = 'Buat Akun';
             $this->load->view('auth/register', $data);
         } else {
-            $email = $this->input->post('email', true);
+            $email = $this->input->post('email_user', true);
             $data = [
-                'nama_user' => htmlspecialchars($this->input->post('name', true)),
-                'email' => htmlspecialchars($email),
-                'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-                'id_role' =>  2,
-                'foto_diri' => "default-user-image.png",
+                'nama_user' => htmlspecialchars($this->input->post('nama_lengkap'), true),
+                'email_user' => htmlspecialchars($email),
+                'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+                'id_role' =>  1,
                 /**$this->input->post('parameter'),**/
-                'is_active' => 0,
+                'is_active' => 1,
                 'date_created' => time()
             ];
 
-            //siapkan token
-            $bytes = random_bytes(32);
-            $token = base64_encode(bin2hex($bytes));
-            $user_token = [
-                'email' => $email,
-                'token' => $token,
-                'date_created' => time()
 
-            ];
-
-            $this->_sendEmail($token, 'verify');
             $this->db->insert('user', $data);
-            $this->db->insert('user_token', $user_token);
 
 
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Selamat akun Anda telah terdaftar. Harap cek Email Anda, untuk aktivasi akun Anda!!!</div>');
@@ -221,14 +210,12 @@ class Auth extends CI_Controller
         }
     }
 
-
-
-
     public function logout()
     {
 
-        $this->session->unset_userdata('email');
+        $this->session->unset_userdata('email_user');
         $this->session->unset_userdata('id_role');
+        $this->session->unset_userdata('nama_user');
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Kamu Telah Keluar</div>');
         redirect('auth');
     }
