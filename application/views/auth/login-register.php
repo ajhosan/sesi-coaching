@@ -29,19 +29,19 @@
                     <h2 class="title">Daftar</h2>
                     <div class="input-field">
                         <i class="fas fa-user-edit"></i>
-                        <input type="text" placeholder="Nama Lengkap" />
+                        <input type="text" name="name" placeholder="Nama Lengkap" />
                     </div>
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>
-                        <input type="email" placeholder="Email" />
+                        <input type="email" name="email" placeholder="Email" />
                     </div>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Username" />
+                        <input type="text" name="username" placeholder="Username" />
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Password" />
+                        <input type="password" name="password" placeholder="Password" />
                     </div>
                     <input type="submit" class="btn" value="Daftar" />
                 </form>
