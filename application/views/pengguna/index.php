@@ -62,7 +62,7 @@
                                     <th><?= $no++; ?></th>
                                     <td><?= $show['goals']; ?></td>
                                     <td><?= $show['duedate']; ?></td>
-                                    <td><a href="<?= base_url('coaches/home/form_action_plan'); ?>">Tambah Action Plan</a></td>
+                                    <td><a href="<?= base_url(); ?>coaches/home/form_action_plan<?= $show['id_goals'] ?>">Tambah Action Plan</a></td>
                                 </tr>
 
                             </tbody>
