@@ -2,83 +2,83 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/sign-signup/style.css" />
-    <title>Masuk & Daftar Form</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title><?= $title; ?></title>
+
+    <!-- Custom fonts for this template-->
+    <link href="<?= base_url(); ?>assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="<?= base_url(); ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
+
 </head>
 
-<body>
+<body style="background-image: url(assets/img/oriental-tiles.png);">
+
     <div class="container">
-        <div class="forms-container">
-            <div class="signin-signup">
-                <form action="#" class="sign-in-form">
-                    <h2 class="title">Masuk</h2>
-                    <div class="input-field">
-                        <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Username" />
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-8 col-lg-12 col-md-9" style="margin-top:5%;">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Login Website!</h1>
+                                    </div>
+                                    <form method="POST" action="<?= base_url('auth'); ?>" class="user">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" name="email" placeholder="Masukan Email...">
+                                            <?= form_error('email', '<small class="text-danger pl-3" >', '</small>'); ?>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control form-control-user" name="password" id="exampleInputPassword" placeholder="Masukan Password">
+                                            <?= form_error('password', '<small class="text-danger pl-3" >', '</small>'); ?>
+                                        </div>
+                                        <button type="submit" class="btn btn-info btn-user btn-block">Login</button>
+                                        </a>
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="forgot-password.html">Lupa Password?</a>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="small" href="<?= base_url('auth/registration'); ?>">Create an Account!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="input-field">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Password" />
-                    </div>
-                    <input type="submit" value="Masuk" class="btn solid" />
-                </form>
-                <form action="#" class="sign-up-form">
-                    <h2 class="title">Daftar</h2>
-                    <div class="input-field">
-                        <i class="fas fa-user-edit"></i>
-                        <input type="text" name="name" placeholder="Nama Lengkap" />
-                    </div>
-                    <div class="input-field">
-                        <i class="fas fa-envelope"></i>
-                        <input type="email" name="email" placeholder="Email" />
-                    </div>
-                    <div class="input-field">
-                        <i class="fas fa-user"></i>
-                        <input type="text" name="username" placeholder="Username" />
-                    </div>
-                    <div class="input-field">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" name="password" placeholder="Password" />
-                    </div>
-                    <input type="submit" class="btn" value="Daftar" />
-                </form>
+                </div>
+
             </div>
+
         </div>
 
-        <div class="panels-container">
-            <div class="panel left-panel">
-                <div class="content">
-                    <h3>Buat akun baru ?</h3>
-                    <p>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-                        ex ratione. Aliquid!
-                    </p>
-                    <button class="btn transparent" id="sign-up-btn">
-                        Daftar
-                    </button>
-                </div>
-                <img src="<?= base_url(); ?>assets/sign-signup/img/log.svg" class="image" alt="" />
-            </div>
-            <div class="panel right-panel">
-                <div class="content">
-                    <h3>Sudah memiliki akun ?</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-                        laboriosam ad deleniti.
-                    </p>
-                    <button class="btn transparent" id="sign-in-btn">
-                        Masuk
-                    </button>
-                </div>
-                <img src="<?= base_url(); ?>assets/sign-signup/img/register.svg" class="image" alt="" />
-            </div>
-        </div>
     </div>
 
-    <script src="<?= base_url(); ?>assets/sign-signup/app.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="<?= base_url(); ?>assets/vendor/jquery/jquery.min.js"></script>
+    <script src="<?= base_url(); ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="<?= base_url(); ?>assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="<?= base_url(); ?>assets/js/sb-admin-2.min.js"></script>
+
 </body>
 
 </html>
