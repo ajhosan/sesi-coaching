@@ -38,7 +38,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
+                <a class="btn btn-primary" href="<?= base_url('auth/logout') ?>">Logout</a>
             </div>
         </div>
     </div>
@@ -60,6 +60,13 @@
 <!-- Page level custom scripts -->
 <script src="<?= base_url(); ?>assets/js/demo/chart-area-demo.js"></script>
 <script src="<?= base_url(); ?>assets/js/demo/chart-pie-demo.js"></script>
+
+<!-- Page level plugins -->
+<script src="<?= base_url(); ?>assets/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="<?= base_url(); ?>assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="<?= base_url(); ?>assets/js/demo/datatables-demo.js"></script>
 
 </body>
 
