@@ -5,7 +5,7 @@
     <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #2043E5;">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-building"></i>
             </div>
@@ -15,17 +15,26 @@
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
-        <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
-            <a class="nav-link" href="index.html">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Goals & Action Plan</span></a>
-        </li>
+
+        <?php if ($user['id_role'] == 1) : ?>
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="<?= base_url('coaches/home/index') ?>">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Goals & Action Plan</span></a>
+            </li>
+        <?php else : ?>
+            <li class="nav-item active">
+                <a class="nav-link" href="<?= base_url('coach/coachcontroller/index') ?>">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard Coach</span></a>
+            </li>
+        <?php endif; ?>
 
         <!-- Divider -->
         <hr class="sidebar-divider">
 
-        <!-- Heading -->
+        <!-- Heading
         <div class="sidebar-heading">
             Profil
         </div>
@@ -34,10 +43,10 @@
             <a class="nav-link" href="index.html">
                 <i class="fas fa-fw fa-id-card"></i>
                 <span>Edit Profil</span></a>
-        </li>
+        </li> -->
 
         <li class="nav-item">
-            <a class="nav-link" href="index.html" style="color: red;">
+            <a class="nav-link" href="<?= base_url('auth/logout') ?>" style="color: red;">
                 <i class="fas fa-sign-out-alt fa-sm fa-fw" style="color: red;"></i>
                 <span>Logout</span></a>
         </li>
