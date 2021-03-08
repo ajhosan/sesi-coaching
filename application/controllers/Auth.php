@@ -53,7 +53,9 @@ class Auth extends CI_Controller
                     if ($user['id_role'] == 1) {
                         redirect('coaches/home');
                     } else if ($user['id_role'] == 2) {
-                        redirect('pengguna/penggunacontroller/index');
+                        redirect('coach/coachcontroller/index');
+                    } else if ($user['id_role'] == 3) {
+                        redirect('menu/view_user');
                     }
                 } else {
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Passwordnya Salah</div>');
@@ -74,7 +76,9 @@ class Auth extends CI_Controller
         if ($this->session->userdata('id_role') == 1) {
             redirect('coaches/home');
         } else if ($this->session->userdata('id_role') == 2) {
-            redirect('pengguna/penggunacontroller');
+            redirect('coach/coachcontroller');
+        } else if ($this->session->userdata('id_role') == 3) {
+            redirect('menu/view_user');
         }
         // jika ada role_id yg lain maka tambahkan disini
     }
@@ -85,22 +89,9 @@ class Auth extends CI_Controller
 
         $this->goToDefaultPage();
         // $this->form_validation->set_rules('name', 'Name', 'required|trim');
-        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
+        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email_user]', [
             'is_unique' => 'Email Ini Sudah Terdaftar!'
         ]);
-        // $this->form_validation->set_rules(
-        //     'username',
-        //     'Username',
-        //     'min_length[4]',
-        //     'required|trim|max_length[30]',
-        //     [
-        //         'max_length' => 'Username tidak boleh lebih dari 30 huruf',
-        //         'min_length' => 'Username tidak boleh kurang dari 4 huruf'
-        //     ]
-        // );
-        // $this->form_validation->set_rules('nik', 'NIK', 'required|trim|is_unique[user.nik]', [
-        //     'is_unique' => 'NIK Ini Sudah Terdaftar!'
-        // ]);
         $this->form_validation->set_rules(
             'password',
             'Password',
@@ -115,7 +106,7 @@ class Auth extends CI_Controller
             $data['title'] = 'Buat Akun';
             $this->load->view('auth/register', $data);
         } else {
-            $email = $this->input->post('email_user', true);
+            $email = $this->input->post('email', true);
             $data = [
                 'nama_user' => htmlspecialchars($this->input->post('nama_lengkap'), true),
                 'email_user' => htmlspecialchars($email),

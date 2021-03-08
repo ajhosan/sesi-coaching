@@ -42,10 +42,6 @@
                                 <?= form_error('email', '<small class="text-danger pl-3" >', '</small>'); ?>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-user" name="username" id="example213" placeholder="Username">
-                                <?= form_error('username', '<small class="text-danger pl-3" >', '</small>'); ?>
-                            </div>
-                            <div class="form-group">
                                 <input type="password" class="form-control form-control-user" name="password" id="exampleInputPassword" placeholder="Password">
                                 <?= form_error('password', '<small class="text-danger pl-3" >', '</small>'); ?>
                             </div>
