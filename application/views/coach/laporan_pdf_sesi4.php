@@ -157,22 +157,28 @@
                         </th>
                     </tr>
                 </thead>
-                <?php
-                $nomor = 1;
-                foreach ($action_plan4 as $show1) : ?>
-                    <?php if ($data_actionplan1['id_user'] == $show1['id_user']) : ?>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <p><?= $show1['deskripsi_coach']; ?></p>
-                                </td>
-                                <td>
-                                    <p><?= $show1['result_coach']; ?></p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    <?php endif; ?>
-                <?php endforeach; ?>
+                <tbody>
+                    <tr>
+                        <td style="border: 1px solid black; text-align:left;">
+                            <?php foreach ($join_table as $data_show) : ?>
+                                <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
+                                    <?php if ($data_show['action_plan_mingguke'] == 4) : ?>
+                                        <p><?= $data_show['deskripsi_coach']; ?></p>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </td>
+                        <td style="border: 1px solid black; text-align:left;">
+                            <?php foreach ($join_table as $data_show) : ?>
+                                <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
+                                    <?php if ($data_show['action_plan_mingguke'] == 4) : ?>
+                                        <p><?= $data_show['result_coach']; ?></p>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
