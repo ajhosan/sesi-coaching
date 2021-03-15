@@ -80,9 +80,9 @@
                     </div>
                 </div>
             </div>
-            <input type="text" name="id_user" value="<?= $action_planedit['id_user']; ?>">
-            <input type="text" name="id_actionplan" value="<?= $action_planedit['id_actionplan'] ?>">
-            <input type="text" name="id_goals" value="<?= $action_planedit['id_goals']; ?>">
+            <input type="text" hidden name="id_user" value="<?= $action_planedit['id_user']; ?>">
+            <input type="text" hidden name="id_actionplan" value="<?= $action_planedit['id_actionplan'] ?>">
+            <input type="text" hidden name="id_goals" value="<?= $action_planedit['id_goals']; ?>">
             <br>
             <a href="<?= $this->agent->referrer(); ?>" class="btn btn-danger">Kembali ke menu sebelumnya</a>
             <button type="submit" class="btn btn-primary">Simpan Komentar & Result</button>
