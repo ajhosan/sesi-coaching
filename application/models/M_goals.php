@@ -14,11 +14,20 @@ class M_goals extends CI_Model
         return $this->db->get_where('goals', array('id_goals' => $id_goal));
     }
 
-    public function edit_data_action($id_goal)
+    public function komentar_result($id_user)
     {
 
         // return $this->db->get_where('action_plan', array('id_actionplan' => $id_action));
         // $data_goals = $this->db->get_where('action_plan', array('id_goals' => $id_goal));
+        $this->db->select('*');
+        $this->db->from('goals');
+        $this->db->join('action_plan', 'goals.id_goals = action_plan.id_goals', 'inner');
+        $this->db->where('goals.id_goals', $id_user);
+        return $this->db->get();
+    }
+
+    public function edit_data_action($id_goal)
+    {
         $this->db->select('*');
         $this->db->from('action_plan');
         $this->db->join('goals', 'action_plan.id_goals = goals.id_goals', 'inner');
@@ -28,9 +37,6 @@ class M_goals extends CI_Model
 
     public function data_action($id_goal)
     {
-
-        // return $this->db->get_where('action_plan', array('id_actionplan' => $id_action));
-        // $data_goals = $this->db->get_where('action_plan', array('id_goals' => $id_goal));
         $this->db->select('*');
         $this->db->from('action_plan');
         $this->db->join('goals', 'action_plan.id_goals = goals.id_goals', 'inner');
