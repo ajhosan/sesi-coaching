@@ -12,8 +12,8 @@
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h2>
-            <center>List User</center>
+        <h2 style="text-align: center;">
+            List User
         </h2>
     </div>
     <div class="card-body">
@@ -27,6 +27,7 @@
                         <th>Role Id</th>
                         <th>Aktif</th>
                         <th>Tanggal Pendaftaran</th>
+                        <th>Target</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -38,6 +39,7 @@
                         <th>Role Id</th>
                         <th>Aktif</th>
                         <th>Tanggal Pendaftaran</th>
+                        <th>Target</th>
                         <th>Action</th>
                     </tr>
                 </tfoot>
@@ -46,21 +48,23 @@
                     <?php foreach ($viewUser as $ur) : ?>
                         <tr>
                             <td scope="row"><?php echo $i; ?></td>
-                            <td><?php echo $ur['nama_user']; ?></td>
-                            <td><?php echo $ur['email_user']; ?></td>
+                            <td><?php echo $ur['name']; ?></td>
+                            <td><?php echo $ur['email']; ?></td>
                             <td><?php echo $ur['role']; ?></td>
                             <td>
                                 <center><?php echo $ur['is_active']; ?></center>
                             </td>
                             <td>Terdaftar Sejak <?= date('d F Y', $ur['date_created']); ?></td>
+                            <td><?= $ur['target']; ?></td>
                             <td>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius: 10px;">
                                         <i class="fas fa-fw fa-bars"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a href="<?= base_url(); ?>menu/view_edit/<?= $ur['id_user']; ?>" class="dropdown-item">Edit Role</a>
-                                        <a href="<?= base_url(); ?>menu/hapus/<?= $ur['id_user']; ?>" class="dropdown-item">Hapus</a>
+                                        <a href="<?= base_url(); ?>menu/view_target_user/<?= $ur['id']; ?>" class="dropdown-item">Tambah/Edit Target</a>
+                                        <a href="<?= base_url(); ?>menu/view_edit/<?= $ur['id']; ?>" class="dropdown-item">Edit Role</a>
+                                        <a href="<?= base_url(); ?>menu/hapus/<?= $ur['id']; ?>" class="dropdown-item">Hapus</a>
                                     </div>
                             </td>
                         </tr>
@@ -71,7 +75,6 @@
         </div>
     </div>
 </div>
-
 
 <!-- Modal -->
 <div class="modal fade" id="tambahAkun" tabindex="-1" role="dialog" aria-labelledby="tambahAkunLabel" aria-hidden="true">
@@ -85,17 +88,31 @@
             </div>
             <form class="user" method="post" action="<?php echo base_url('menu/registration'); ?>">
                 <div class="modal-body">
-                    <div class="form-group">
-                        <input type="text" class="form-control form-control-user" name="nama_lengkap" id="exampleFirstName" placeholder="Full Name">
+                    <center><img src="http://korporaconsulting.com/wp-content/uploads/2018/04/Untitled-1cc.png" style="width: 500px 100%; height: 50px;"></center>
+                    <div class="form-group"><br>
+                        <input type="text" class="form-control form-control-user" id="name" name="name" placeholder="Full Name" value="<?= set_value('name'); ?>">
                         <?= form_error('name', '<small class="text-danger pl-3" >', '</small>'); ?>
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control form-control-user" name="email" placeholder="Email Address">
+                        <input type="text" class="form-control form-control-user" id="email" name="email" placeholder="Email Address" value="<?= set_value('email'); ?>">
                         <?= form_error('email', '<small class="text-danger pl-3" >', '</small>'); ?>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control form-control-user" name="password" id="exampleInputPassword" placeholder="Password">
-                        <?= form_error('password', '<small class="text-danger pl-3" >', '</small>'); ?>
+                        <select name="role_id" id="role_id" class="form-control" style="border-radius:20px;">
+                            <option value=" ">Pilih Jabatan</option>
+                            <?php foreach ($menus as $m) : ?>
+                                <option value="<?= $m['id'] ?>"><?= $m['role'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <input type="password" class="form-control form-control-user" id="password1" name="password1" placeholder="Password">
+                            <?= form_error('password1', '<small class="text-danger pl-3" >', '</small>'); ?>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="password" class="form-control form-control-user" id="password2" name="password2" placeholder="Repeat Password">
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -147,8 +164,6 @@
     </div>
 </div>
 
-<script>
-    $('#dataTable').DataTable({
-        ordering: false
-    });
-</script>
+</body>
+
+</html>

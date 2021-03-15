@@ -38,7 +38,7 @@
                                                 <p class="badge badge-success">Data Tidak Dapat Dihapus Dikarenakan Sudah Mengisi Action Plan</p>
                                             </td>
                                         <?php else : ?>
-                                            <td><a class="btn btn-danger" href="<?= base_url(); ?>coach/coachcontroller/hapus_goal_peserta/<?= $show['id_goals'] ?>">Hapus Data</a></td>
+                                            <td><a onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger" href="<?= base_url(); ?>coach/coachcontroller/hapus_goal_peserta/<?= $show['id_goals'] ?>">Hapus Data</a></td>
                                         <?php endif; ?>
 
                                     </tr>
@@ -130,12 +130,9 @@
                                 <thead style="text-align: center;">
                                     <tr>
                                         <th width="1%" rowspan="2">Nomor</th>
-                                        <th width="30%" rowspan="2">Action Plan</th>
+                                        <th width="60%" rowspan="2" style="text-align: left;">Action Plan</th>
 
                                         <th width="10%" colspan="3">Result</th>
-                                        <th width="20%" rowspan="2">Komentar Coach</th>
-                                        <th width="10%" rowspan="2">Result Coach</th>
-                                        <th rowspan="2">Action</th>
 
                                     </tr>
                                     <tr>
@@ -152,19 +149,46 @@
                                         <tbody style="text-align: center;">
                                             <tr>
                                                 <th><?= $nomor++; ?></th>
-                                                <td><?= $show1['action_plan']; ?></td>
+                                                <td style="text-align: left;"><?= $show1['action_plan']; ?></td>
                                                 <td><?= $show1['berhasil']; ?></td>
                                                 <td><?= $show1['tidak_berhasil']; ?></td>
                                                 <td><?= $show1['butuh_waktu_lama']; ?></td>
-                                                <td><?= $show1['deskripsi_coach']; ?></td>
-                                                <td><?= $show1['result_coach']; ?></td>
-                                                <td><a href="<?= base_url(); ?>coach/coachcontroller/edit_action_plan/<?= $show1['id_actionplan'] ?>">Update Comment/Result</a></td>
                                             </tr>
                                         </tbody>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
 
                             </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- <?= var_dump($komentar_result); ?> -->
+                                <div style="border:1px solid gray; padding:10px; box-shadow: 5px 5px 10px #888888; border-radius:5px;">
+                                    <h4 style="color: black;">Komentar Coach</h4>
+                                    <hr>
+                                    <?php foreach ($join_table as $data_show) : ?>
+                                        <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
+                                            <?php if ($data_show['action_plan_mingguke'] == 1) : ?>
+                                                <p><?= nl2br($data_show['deskripsi_coach']); ?></p>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <!-- <?= var_dump($komentar_result); ?> -->
+                                <div style="border:1px solid gray; padding:10px; box-shadow: 5px 5px 10px #888888; border-radius:5px;">
+                                    <h4 style="color: black;">Result Coach</h4>
+                                    <hr>
+                                    <?php foreach ($join_table as $data_show) : ?>
+                                        <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
+                                            <?php if ($data_show['action_plan_mingguke'] == 1) : ?>
+                                                <p><?= nl2br($data_show['result_coach']); ?></p>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -179,14 +203,16 @@
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h2 style="color: black; text-align:center;">Sesi Coaching Kedua</h2>
-                        <a href="<?= base_url(); ?>coach/cetaklaporan/laporan_pdf2/<?= $data_actionplan1['id_user']; ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>Cetak Report</a>
-                        <?php foreach ($join_table as $data_show) : ?>
-                            <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
-                                <?php if ($data_show['action_plan_mingguke'] == 2) : ?>
-                                    <a href="<?= base_url(); ?>coach/coachcontroller/edit_action_plan/<?= $data_show['id_goals'] ?>" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-plus"></i> Update Komentar & Result</a>
+                        <div>
+                            <a href="<?= base_url(); ?>coach/cetaklaporan/laporan_pdf2/<?= $data_actionplan1['id_user']; ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>Cetak Report</a>
+                            <?php foreach ($join_table as $data_show) : ?>
+                                <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
+                                    <?php if ($data_show['action_plan_mingguke'] == 2) : ?>
+                                        <a href="<?= base_url(); ?>coach/coachcontroller/edit_action_plan/<?= $data_show['id_goals'] ?>" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-plus"></i> Update Komentar & Result</a>
+                                    <?php endif; ?>
                                 <?php endif; ?>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
@@ -222,9 +248,6 @@
                                         <th width="30%" rowspan="2">Action Plan</th>
 
                                         <th width="10%" colspan="3">Result</th>
-                                        <th width="20%" rowspan="2">Komentar Coach</th>
-                                        <th width="10%" rowspan="2">Result Coach</th>
-                                        <th rowspan="2">Action</th>
 
                                     </tr>
                                     <tr>
@@ -244,17 +267,40 @@
                                                 <td><?= $show1['berhasil']; ?></td>
                                                 <td><?= $show1['tidak_berhasil']; ?></td>
                                                 <td><?= $show1['butuh_waktu_lama']; ?></td>
-                                                <td><?= $show1['deskripsi_coach']; ?></td>
-                                                <td><?= $show1['result_coach']; ?></td>
-                                                <td><a href="<?= base_url(); ?>coach/coachcontroller/edit_action_plan/<?= $show1['id_actionplan'] ?>">Update Comment/Result</a></td>
                                             </tr>
                                         </tbody>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
-
                             </table>
                         </div>
-
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div style="border:1px solid gray; padding:10px; box-shadow: 5px 5px 10px #888888; border-radius:5px;">
+                                    <h4 style="color: black;">Komentar Coach</h4>
+                                    <hr>
+                                    <?php foreach ($join_table as $data_show) : ?>
+                                        <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
+                                            <?php if ($data_show['action_plan_mingguke'] == 2) : ?>
+                                                <p><?= nl2br($data_show['deskripsi_coach']); ?></p>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div style="border:1px solid gray; padding:10px; box-shadow: 5px 5px 10px #888888; border-radius:5px;">
+                                    <h4 style="color: black;">Result Coach</h4>
+                                    <hr>
+                                    <?php foreach ($join_table as $data_show) : ?>
+                                        <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
+                                            <?php if ($data_show['action_plan_mingguke'] == 2) : ?>
+                                                <p><?= nl2br($data_show['result_coach']); ?></p>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -268,7 +314,16 @@
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h2 style="color: black; text-align:center;">Sesi Coaching Ketiga</h2>
-                        <a href="<?= base_url(); ?>coach/cetaklaporan/laporan_pdf3/<?= $data_actionplan1['id_user']; ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>Cetak Report</a>
+                        <div>
+                            <a href="<?= base_url(); ?>coach/cetaklaporan/laporan_pdf3/<?= $data_actionplan1['id_user']; ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>Cetak Report</a>
+                            <?php foreach ($join_table as $data_show) : ?>
+                                <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
+                                    <?php if ($data_show['action_plan_mingguke'] == 3) : ?>
+                                        <a href="<?= base_url(); ?>coach/coachcontroller/edit_action_plan/<?= $data_show['id_goals'] ?>" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-plus"></i> Update Komentar & Result</a>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
@@ -304,9 +359,6 @@
                                         <th width="30%" rowspan="2">Action Plan</th>
 
                                         <th width="10%" colspan="3">Result</th>
-                                        <th width="20%" rowspan="2">Komentar Coach</th>
-                                        <th width="10%" rowspan="2">Result Coach</th>
-                                        <th rowspan="2">Action</th>
 
                                     </tr>
                                     <tr>
@@ -326,9 +378,6 @@
                                                 <td><?= $show1['berhasil']; ?></td>
                                                 <td><?= $show1['tidak_berhasil']; ?></td>
                                                 <td><?= $show1['butuh_waktu_lama']; ?></td>
-                                                <td><?= $show1['deskripsi_coach']; ?></td>
-                                                <td><?= $show1['result_coach']; ?></td>
-                                                <td><a href="<?= base_url(); ?>coach/coachcontroller/edit_action_plan/<?= $show1['id_actionplan'] ?>">Update Comment/Result</a></td>
                                             </tr>
                                         </tbody>
                                     <?php endif; ?>
@@ -336,7 +385,34 @@
 
                             </table>
                         </div>
-
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div style="border:1px solid gray; padding:10px; box-shadow: 5px 5px 10px #888888; border-radius:5px;">
+                                    <h4 style="color: black;">Komentar Coach</h4>
+                                    <hr>
+                                    <?php foreach ($join_table as $data_show) : ?>
+                                        <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
+                                            <?php if ($data_show['action_plan_mingguke'] == 3) : ?>
+                                                <p><?= nl2br($data_show['deskripsi_coach']); ?></p>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div style="border:1px solid gray; padding:10px; box-shadow: 5px 5px 10px #888888; border-radius:5px;">
+                                    <h4 style="color: black;">Result Coach</h4>
+                                    <hr>
+                                    <?php foreach ($join_table as $data_show) : ?>
+                                        <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
+                                            <?php if ($data_show['action_plan_mingguke'] == 3) : ?>
+                                                <p><?= nl2br($data_show['result_coach']); ?></p>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -351,7 +427,16 @@
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h2 style="color: black; text-align:center;">Sesi Coaching Keempat</h2>
-                        <a href="<?= base_url(); ?>coach/cetaklaporan/laporan_pdf4/<?= $data_actionplan1['id_user']; ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>Cetak Report</a>
+                        <div>
+                            <a href="<?= base_url(); ?>coach/cetaklaporan/laporan_pdf4/<?= $data_actionplan1['id_user']; ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>Cetak Report</a>
+                            <?php foreach ($join_table as $data_show) : ?>
+                                <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
+                                    <?php if ($data_show['action_plan_mingguke'] == 4) : ?>
+                                        <a href="<?= base_url(); ?>coach/coachcontroller/edit_action_plan/<?= $data_show['id_goals'] ?>" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-plus"></i> Update Komentar & Result</a>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
@@ -387,9 +472,6 @@
                                         <th width="30%" rowspan="2">Action Plan</th>
 
                                         <th width="10%" colspan="3">Result</th>
-                                        <th width="20%" rowspan="2">Komentar Coach</th>
-                                        <th width="10%" rowspan="2">Result Coach</th>
-                                        <th rowspan="2">Action</th>
 
                                     </tr>
                                     <tr>
@@ -409,9 +491,6 @@
                                                 <td><?= $show1['berhasil']; ?></td>
                                                 <td><?= $show1['tidak_berhasil']; ?></td>
                                                 <td><?= $show1['butuh_waktu_lama']; ?></td>
-                                                <td><?= $show1['deskripsi_coach']; ?></td>
-                                                <td><?= $show1['result_coach']; ?></td>
-                                                <td><a href="<?= base_url(); ?>coach/coachcontroller/edit_action_plan/<?= $show1['id_actionplan'] ?>">Update Comment/Result</a></td>
                                             </tr>
                                         </tbody>
                                     <?php endif; ?>
@@ -419,7 +498,34 @@
 
                             </table>
                         </div>
-
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div style="border:1px solid gray; padding:10px; box-shadow: 5px 5px 10px #888888; border-radius:5px;">
+                                    <h4 style="color: black;">Komentar Coach</h4>
+                                    <hr>
+                                    <?php foreach ($join_table as $data_show) : ?>
+                                        <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
+                                            <?php if ($data_show['action_plan_mingguke'] == 4) : ?>
+                                                <p><?= nl2br($data_show['deskripsi_coach']); ?></p>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div style="border:1px solid gray; padding:10px; box-shadow: 5px 5px 10px #888888; border-radius:5px;">
+                                    <h4 style="color: black;">Result Coach</h4>
+                                    <hr>
+                                    <?php foreach ($join_table as $data_show) : ?>
+                                        <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
+                                            <?php if ($data_show['action_plan_mingguke'] == 4) : ?>
+                                                <p><?= nl2br($data_show['result_coach']); ?></p>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -434,7 +540,16 @@
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h2 style="color: black; text-align:center;">Sesi Coaching Kelima</h2>
-                        <a href="<?= base_url(); ?>coach/cetaklaporan/laporan_pdf5/<?= $data_actionplan1['id_user']; ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>Cetak Report</a>
+                        <div>
+                            <a href="<?= base_url(); ?>coach/cetaklaporan/laporan_pdf5/<?= $data_actionplan1['id_user']; ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>Cetak Report</a>
+                            <?php foreach ($join_table as $data_show) : ?>
+                                <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
+                                    <?php if ($data_show['action_plan_mingguke'] == 5) : ?>
+                                        <a href="<?= base_url(); ?>coach/coachcontroller/edit_action_plan/<?= $data_show['id_goals'] ?>" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-plus"></i> Update Komentar & Result</a>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
@@ -470,9 +585,6 @@
                                         <th width="30%" rowspan="2">Action Plan</th>
 
                                         <th width="10%" colspan="3">Result</th>
-                                        <th width="20%" rowspan="2">Komentar Coach</th>
-                                        <th width="10%" rowspan="2">Result Coach</th>
-                                        <th rowspan="2">Action</th>
 
                                     </tr>
                                     <tr>
@@ -492,9 +604,6 @@
                                                 <td><?= $show1['berhasil']; ?></td>
                                                 <td><?= $show1['tidak_berhasil']; ?></td>
                                                 <td><?= $show1['butuh_waktu_lama']; ?></td>
-                                                <td><?= $show1['deskripsi_coach']; ?></td>
-                                                <td><?= $show1['result_coach']; ?></td>
-                                                <td><a href="<?= base_url(); ?>coach/coachcontroller/edit_action_plan/<?= $show1['id_actionplan'] ?>">Update Comment/Result</a></td>
                                             </tr>
                                         </tbody>
                                     <?php endif; ?>
@@ -502,7 +611,34 @@
 
                             </table>
                         </div>
-
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div style="border:1px solid gray; padding:10px; box-shadow: 5px 5px 10px #888888; border-radius:5px;">
+                                    <h4 style="color: black;">Komentar Coach</h4>
+                                    <hr>
+                                    <?php foreach ($join_table as $data_show) : ?>
+                                        <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
+                                            <?php if ($data_show['action_plan_mingguke'] == 5) : ?>
+                                                <p><?= nl2br($data_show['deskripsi_coach']); ?></p>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div style="border:1px solid gray; padding:10px; box-shadow: 5px 5px 10px #888888; border-radius:5px;">
+                                    <h4 style="color: black;">Result Coach</h4>
+                                    <hr>
+                                    <?php foreach ($join_table as $data_show) : ?>
+                                        <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
+                                            <?php if ($data_show['action_plan_mingguke'] == 5) : ?>
+                                                <p><?= nl2br($data_show['result_coach']); ?></p>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -517,7 +653,16 @@
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h2 style="color: black; text-align:center;">Sesi Coaching Keenam</h2>
-                        <a href="<?= base_url(); ?>coach/cetaklaporan/laporan_pdf6/<?= $data_actionplan1['id_user']; ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>Cetak Report</a>
+                        <div>
+                            <a href="<?= base_url(); ?>coach/cetaklaporan/laporan_pdf6/<?= $data_actionplan1['id_user']; ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>Cetak Report</a>
+                            <?php foreach ($join_table as $data_show) : ?>
+                                <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
+                                    <?php if ($data_show['action_plan_mingguke'] == 6) : ?>
+                                        <a href="<?= base_url(); ?>coach/coachcontroller/edit_action_plan/<?= $data_show['id_goals'] ?>" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-plus"></i> Update Komentar & Result</a>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
@@ -553,9 +698,6 @@
                                         <th width="30%" rowspan="2">Action Plan</th>
 
                                         <th width="10%" colspan="3">Result</th>
-                                        <th width="20%" rowspan="2">Komentar Coach</th>
-                                        <th width="10%" rowspan="2">Result Coach</th>
-                                        <th rowspan="2">Action</th>
 
                                     </tr>
                                     <tr>
@@ -575,17 +717,40 @@
                                                 <td><?= $show1['berhasil']; ?></td>
                                                 <td><?= $show1['tidak_berhasil']; ?></td>
                                                 <td><?= $show1['butuh_waktu_lama']; ?></td>
-                                                <td><?= $show1['deskripsi_coach']; ?></td>
-                                                <td><?= $show1['result_coach']; ?></td>
-                                                <td><a href="<?= base_url(); ?>coach/coachcontroller/edit_action_plan/<?= $show1['id_actionplan'] ?>">Update Comment/Result</a></td>
                                             </tr>
                                         </tbody>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
-
                             </table>
                         </div>
-
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div style="border:1px solid gray; padding:10px; box-shadow: 5px 5px 10px #888888; border-radius:5px;">
+                                    <h4 style="color: black;">Komentar Coach</h4>
+                                    <hr>
+                                    <?php foreach ($join_table as $data_show) : ?>
+                                        <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
+                                            <?php if ($data_show['action_plan_mingguke'] == 6) : ?>
+                                                <p><?= nl2br($data_show['deskripsi_coach']); ?></p>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div style="border:1px solid gray; padding:10px; box-shadow: 5px 5px 10px #888888; border-radius:5px;">
+                                    <h4 style="color: black;">Result Coach</h4>
+                                    <hr>
+                                    <?php foreach ($join_table as $data_show) : ?>
+                                        <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
+                                            <?php if ($data_show['action_plan_mingguke'] == 6) : ?>
+                                                <p><?= nl2br($data_show['result_coach']); ?></p>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
