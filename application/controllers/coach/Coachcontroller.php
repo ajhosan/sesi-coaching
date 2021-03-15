@@ -33,6 +33,7 @@ class Coachcontroller extends CI_Controller
     {
         $data['user'] = $this->db->get_where('user', ['email_user' => $this->session->userdata('email')])->row_array();
         $data['data_actionplan1'] = $this->m_actionplan->lihat_data($id_user)->row_array();
+        $data['komentar_result'] = $this->m_goals->komentar_result($id_user)->row_array();
         $data['show_goals'] = $this->m_goals->read_data()->result_array();
         $data['where_goals'] = $this->m_goals->read_data()->row_array();
         $data['actionplan1'] = $this->m_actionplan->read_data()->result_array();
