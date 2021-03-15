@@ -2,7 +2,7 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #2043E5;">
+    <ul class="navbar-nav sidebar sidebar-dark accordion" id="nav" style="background-color: #2043E5;">
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
@@ -18,13 +18,18 @@
 
         <?php if ($user['id_role'] == 1) : ?>
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('coaches/home/index') ?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Goals & Action Plan</span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('coaches/user/changePassword') ?>">
+                    <i class="fas fa-key"></i>
+                    <span>Ganti Password</span></a>
+            </li>
         <?php else : ?>
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('coach/coachcontroller/index') ?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard Coach</span></a>

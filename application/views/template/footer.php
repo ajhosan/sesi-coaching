@@ -68,6 +68,12 @@
 <!-- Page level custom scripts -->
 <script src="<?= base_url(); ?>assets/js/demo/datatables-demo.js"></script>
 
+<script>
+    $(function() {
+        $('#nav a[href~="' + location.href + '"]').parents('li').addClass('active');
+    });
+</script>
+
 </body>
 
 </html>
