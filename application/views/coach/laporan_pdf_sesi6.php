@@ -163,7 +163,7 @@
                             <?php foreach ($join_table as $data_show) : ?>
                                 <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
                                     <?php if ($data_show['action_plan_mingguke'] == 6) : ?>
-                                        <p><?= $data_show['deskripsi_coach']; ?></p>
+                                        <p><?= nl2br($data_show['deskripsi_coach']); ?></p>
                                     <?php endif; ?>
                                 <?php endif; ?>
                             <?php endforeach; ?>
@@ -172,7 +172,7 @@
                             <?php foreach ($join_table as $data_show) : ?>
                                 <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
                                     <?php if ($data_show['action_plan_mingguke'] == 6) : ?>
-                                        <p><?= $data_show['result_coach']; ?></p>
+                                        <p><?= nl2br($data_show['result_coach']); ?></p>
                                     <?php endif; ?>
                                 <?php endif; ?>
                             <?php endforeach; ?>
