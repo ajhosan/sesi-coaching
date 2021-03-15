@@ -18,7 +18,7 @@
 <body>
     <div class="card">
         <div class="card-header">
-            <h1 style="text-align: center;">Laporan Hasil Sesi Coaching Pertama</h1>
+            <h1 style="text-align: center;">Laporan Coaching Sesi Kelima</h1>
         </div>
         <div class="card-body">
             <div class="profil">
@@ -129,7 +129,7 @@
                     </thead>
                     <?php
                     $nomor = 1;
-                    foreach ($actionplan1 as $show1) : ?>
+                    foreach ($action_plan5 as $show1) : ?>
                         <?php if ($data_actionplan1['id_user'] == $show1['id_user']) : ?>
                             <tbody style="text-align: left;" style="border: 1px solid black;">
                                 <tr>
@@ -159,7 +159,7 @@
                 </thead>
                 <?php
                 $nomor = 1;
-                foreach ($actionplan1 as $show1) : ?>
+                foreach ($action_plan5 as $show1) : ?>
                     <?php if ($data_actionplan1['id_user'] == $show1['id_user']) : ?>
                         <tbody>
                             <tr>
