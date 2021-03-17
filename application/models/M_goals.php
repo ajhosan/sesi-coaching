@@ -35,6 +35,15 @@ class M_goals extends CI_Model
         return $this->db->get();
     }
 
+    public function edit_data_actionplan($id_action)
+    {
+        $this->db->select('*');
+        $this->db->from('action_plan');
+        $this->db->join('goals', 'action_plan.id_goals = goals.id_goals', 'inner');
+        $this->db->where('id_actionplan', $id_action);
+        return $this->db->get();
+    }
+
     public function data_action($id_goal)
     {
         $this->db->select('*');
