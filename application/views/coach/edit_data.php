@@ -5,15 +5,22 @@
             <div class="col-md-5">
                 <h4 style="color: black;">
                     <strong> Goal</strong> :
-                    <?= $action_planedit['goals']; ?>
+                    <?php foreach ($join_table as $data_show) : ?>
+                        <?php if ($goals['id_goals'] == $data_show['id_goals']) : ?>
+                            <?= $data_show['goals']; ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
 
                 </h4>
             </div>
             <div class="col-md-7">
                 <h4 style="color: black; text-align:left;">
                     <strong> Success Criteria</strong> :
-                    <?= $action_planedit['success_criteria']; ?>
-
+                    <?php foreach ($join_table as $data_show) : ?>
+                        <?php if ($goals['id_goals'] == $data_show['id_goals']) : ?>
+                            <?= $data_show['success_criteria']; ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </h4>
             </div>
         </div>
@@ -35,33 +42,35 @@
                     </thead>
                     <?php $no = 1;
                     foreach ($actionplan as $data) : ?>
-                        <tbody style="text-align: center;">
-                            <tr>
-                                <th><?= $no++; ?></th>
-                                <td>
-                                    <div class="mb-3">
-                                        <div class="form-floating">
-                                            <p><?= $data['action_plan']; ?></p>
+                        <?php if ($goals['id_goals'] == $data['id_goals']) : ?>
+                            <tbody style="text-align: center;">
+                                <tr>
+                                    <th><?= $no++; ?></th>
+                                    <td>
+                                        <div class="mb-3">
+                                            <div class="form-floating">
+                                                <p><?= $data['action_plan']; ?></p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-check form-check-inline">
-                                        <p><?= $data['berhasil']; ?></p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-check form-check-inline">
-                                        <p><?= $data['tidak_berhasil']; ?></p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-check form-check-inline">
-                                        <p><?= $data['tidak_berhasil']; ?></p>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
+                                    </td>
+                                    <td>
+                                        <div class="form-check form-check-inline">
+                                            <p><?= $data['berhasil']; ?></p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-check form-check-inline">
+                                            <p><?= $data['tidak_berhasil']; ?></p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-check form-check-inline">
+                                            <p><?= $data['butuh_waktu_lama']; ?></p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </table>
             </div>

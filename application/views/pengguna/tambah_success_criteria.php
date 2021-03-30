@@ -7,16 +7,10 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label style="background-color: blue; color:white; padding:1%; border-radius: 10px 100px 100px 10px;">Sesi Coaching Yang Ke Berapa : </label>
-                        <select class=" form-select" name="minggu_keberapa" aria-label="Default select example" required>
-                            <option value="">Pilih Sesi</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                        </select>
+                        <input type="text" hidden name="sesi_ke" class="form-control" value="1">
+                        <input type="text" hidden name="pertemuan_ke" class="form-control" value="<?= $user['pertemuan_ke']; ?>">
+                        <input type="date" hidden class="form-control" name="tanggal_pertemuan_skrng" value="<?= date('Y-m-d'); ?>">
+                        <input type="date" hidden name="tanggal_pertemuan_database" class="form-control" value="<?= $user['tanggal_pertemuan']; ?>">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -45,7 +39,7 @@
                             <td>
                                 <div class="mb-3">
                                     <div class="form-floating">
-                                        <textarea class="form-control" rows="5" name="actionplan1" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                                        <textarea class="form-control" rows="3" name="actionplan1" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
                                     </div>
                                 </div>
                             </td>
@@ -55,7 +49,7 @@
                             <td>
                                 <div class="mb-3">
                                     <div class="form-floating">
-                                        <textarea class="form-control" rows="5" name="actionplan2" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                                        <textarea class="form-control" rows="3" name="actionplan2" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
                                     </div>
                                 </div>
                             </td>
@@ -65,7 +59,7 @@
                             <td>
                                 <div class="mb-3">
                                     <div class="form-floating">
-                                        <textarea class="form-control" rows="5" name="actionplan3" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                                        <textarea class="form-control" rows="3" name="actionplan3" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
                                     </div>
                                 </div>
                             </td>
@@ -75,7 +69,7 @@
                             <td>
                                 <div class="mb-3">
                                     <div class="form-floating">
-                                        <textarea class="form-control" rows="5" name="actionplan4" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                                        <textarea class="form-control" rows="3" name="actionplan4" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
                                     </div>
                                 </div>
                             </td>
@@ -85,7 +79,7 @@
                             <td>
                                 <div class="mb-3">
                                     <div class="form-floating">
-                                        <textarea class="form-control" rows="5" name="actionplan5" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                                        <textarea class="form-control" rows="3" name="actionplan5" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
                                     </div>
                                 </div>
                             </td>

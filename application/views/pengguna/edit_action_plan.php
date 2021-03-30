@@ -1,13 +1,32 @@
 <div class="card">
-    <h5 class="card-header">Tambah Action Plan</h5>
+
+    <div class="card-header">
+        <h5>Tambah Action Plan</h5>
+    </div>
+
     <div class="card-body">
         <form method="POST" action="<?= base_url('coaches/home/edit_action_now'); ?>">
+            <input type="text" hidden name="user_id" value="<?= $user['id_user']; ?>">
+            <input type="text" hidden name="goals_anda" value="<?= $tbl_goals['id_goals']; ?>">
+            <input type="text" hidden name="success_criteria" value="<?= $tbl_goals['success_criteria']; ?>">
+            <input type="text" hidden name="pertemuan_ke" value="<?= $user['pertemuan_ke']; ?>">
+            <input type="date" hidden name="tanggal_pertemuan_database" value="<?= $user['tanggal_pertemuan']; ?>">
+            <input type="date" hidden name="tanggal_pertemuan_skrng" value="<?= date('Y-m-d'); ?>">
+            <input type="text" hidden name="sesi_coaching" value="<?= $tbl_goals['sesi_ke']; ?>">
+            <a href="<?= $this->agent->referrer(); ?>" class="btn btn-danger">Kembali ke main menu</a>
+            <?php foreach ($action_show as $result) : ?>
+                <?php if ($result['check_status'] == "SELESAI") : ?>
+                    <h4 style="color: black;" class="float-right">Anda telah menyelesaikan sesi coaching ini, terimakasih</h4>
+                <?php else : ?>
+                    <button type="submit" class="btn btn-primary btn-lg float-right" style="margin-bottom: 2%;">Simpan action plan</button>
+                <?php endif; ?>
+            <?php endforeach; ?>
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead style="text-align: center;">
                         <tr>
                             <th width="1%" rowspan="2">Nomor</th>
-                            <th width="40%" rowspan="2">Action Plan</th>
+                            <th width="59%" rowspan="2">Action Plan</th>
                             <th width="40%" colspan="3">Result</th>
 
                         </tr>
@@ -17,58 +36,44 @@
                             <th>Butuh Waktu Lama</th>
                         </tr>
                     </thead>
-                    <?php $no = 1; ?>
+                    <?php $no = 1;
+                    $array = 1;
+                    $id_goals_number = 1;
+                    ?>
                     <tbody style="text-align: center;">
-                        <tr>
-                            <th><?= $no++; ?></th>
-                            <td>
-                                <div class="mb-3">
-                                    <div class="form-floating">
-                                        <textarea class="form-control" rows="5" name="actionplan1" placeholder="Leave a comment here" id="floatingTextarea"><?= $action_plan['action_plan']; ?></textarea>
+                        <?php foreach ($action_planpeserta as $show) : ?>
+                            <tr>
+                                <th><?= $no++; ?></th>
+                                <td>
+                                    <div class="mb-3">
+                                        <div class="form-floating">
+                                            <input type="text" hidden name="id_actionplan<?= $id_goals_number++; ?>" class="form-control" value="<?= $show['id_actionplan']; ?>">
+                                            <input type="text" hidden name="check_progres" class="form-control" value="SELESAI">
+                                            <textarea class="form-control" rows="5" name="actionplan<?= $array++; ?>" placeholder="Leave a comment here" id="floatingTextarea"><?= $show['action_plan']; ?></textarea>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="berhasil" value="✔" <?= $action_plan['berhasil'] ? "checked"  : '✔'; ?>>
-                                    <label class="form-check-label" for="inlineCheckbox1">Berhasil</label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="tidak_berhasil" value="✔" <?= $action_plan['tidak_berhasil'] ? "checked"  : '✔'; ?>>
-                                    <label class="form-check-label" for="inlineCheckbox2">Tidak Berhasil</label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="butuh_waktu" value="✔" <?= $action_plan['butuh_waktu_lama'] ? "checked"  : '✔'; ?>>
-                                    <label class="form-check-label" for="inlineCheckbox3">Butuh Waktu Lebih Lama</label>
-                                </div>
-                            </td>
-                        </tr>
-
+                                </td>
+                                <td>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="berhasil<?= $array++; ?>" value="✔" <?php echo $show['berhasil'] ? "checked"  : ' '; ?>>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="tidak_berhasil<?= $array++; ?>" value="✔" <?php echo $show['tidak_berhasil'] ? "checked"  : ' '; ?>>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="butuh_waktu_lama<?= $array++; ?>" value="✔" <?php echo $show['butuh_waktu_lama'] ? "checked"  : ' '; ?>>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
-            <input type="text" hidden name="id_actionplan" value="<?= $action_plan['id_actionplan'] ?>">
-
             <br>
-            <!-- <div class="form-group">
-                <label>Success Criteria : </label>
-                <input type="text" class="form-control col-md-3" name="criteria">
-            </div>
-            <div class="form-group">
-                <label>Sesi Coaching Yang Ke Berapa : </label>
-                <select class="form-select" name="minggu_keberapa" aria-label="Default select example">
-                    <option selected>Pilih</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-            </div> -->
-            <a href="<?= base_url('coaches/home/index'); ?>" class="btn btn-danger">Kembali ke main menu</a>
-            <button type="submit" class="btn btn-primary">Simpan action plan</button>
         </form>
     </div>
 </div>
