@@ -18,7 +18,7 @@
 <body>
     <div class="card">
         <div class="card-header">
-            <h1 style="text-align: center;">Laporan Coaching Sesi Pertama</h1>
+            <h1 style="text-align: center;">Laporan Coaching</h1>
         </div>
         <div class="card-body">
             <div class="profil">
@@ -47,12 +47,8 @@
                             </th>
                             <td>
                                 <p>:
-                                    <?php foreach ($join_table as $data_show) : ?>
-                                        <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
-                                            <?php if ($data_show['action_plan_mingguke'] == 1) : ?>
-                                                <?= $data_show['date_created']; ?>
-                                            <?php endif; ?>
-                                        <?php endif; ?>
+                                    <?php foreach ($action_show as $show) : ?>
+                                        <?= $show['date_created']; ?>
                                     <?php endforeach; ?>
                                 </p>
                             </td>
@@ -63,12 +59,8 @@
                             </th>
                             <td>
                                 <p>:
-                                    <?php foreach ($join_table as $data_show) : ?>
-                                        <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
-                                            <?php if ($data_show['action_plan_mingguke'] == 1) : ?>
-                                                <?= $data_show['action_plan_mingguke']; ?>
-                                            <?php endif; ?>
-                                        <?php endif; ?>
+                                    <?php foreach ($action_show as $show) : ?>
+                                        <?= $show['sesi_ke']; ?>
                                     <?php endforeach; ?>
                                 </p>
                             </td>
@@ -82,37 +74,20 @@
                         <tr>
                             <th width="50%" style="text-align: left;">
                                 <p>Goal :
-                                    <?php foreach ($join_table as $data_show) : ?>
-                                        <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
-                                            <?php if ($data_show['action_plan_mingguke'] == 1) : ?>
-                                                <?= $data_show['goals']; ?>
-                                            <?php endif; ?>
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
+                                    <?= $goals_user['goals']; ?>
                                 </p>
                             </th>
                             <th width="50%" style="text-align:right;">
                                 <p>Due Date :
-                                    <?php foreach ($join_table as $data_show) : ?>
-                                        <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
-                                            <?php if ($data_show['action_plan_mingguke'] == 1) : ?>
-                                                <?= $data_show['duedate']; ?>
-                                            <?php endif; ?>
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
+                                    <?= $goals_user['duedate']; ?>
                                 </p>
                             </th>
                         </tr>
                     </thead>
                 </table>
                 <p style="font-weight: bold;">Success Criteria :
-                    <?php foreach ($join_table as $data_show) : ?>
-                        <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
-                            <?php if ($data_show['action_plan_mingguke'] == 1) : ?>
-                                <?= $data_show['success_criteria']; ?>
-                            <?php endif; ?>
-                        <?php endif; ?>
-                    <?php endforeach; ?></p>
+                    <?= $goals_user['success_criteria']; ?>
+                </p>
                 <table width="100%" style="border: 1px solid black;">
                     <thead style="text-align: center;">
                         <tr>
@@ -129,18 +104,16 @@
                     </thead>
                     <?php
                     $nomor = 1;
-                    foreach ($actionplan1 as $show1) : ?>
-                        <?php if ($data_actionplan1['id_user'] == $show1['id_user']) : ?>
-                            <tbody style="text-align: left;" style="border: 1px solid black;">
-                                <tr>
-                                    <th style="border: 1px solid black;"><?= $nomor++ ?></th>
-                                    <td style="border: 1px solid black;"><?= $show1['action_plan']; ?></td>
-                                    <td style="border: 1px solid black;text-align:center; font-family: DejaVu Sans;"><?= $show1['berhasil']; ?></td>
-                                    <td style="border: 1px solid black;text-align:center; font-family: DejaVu Sans;"><?= $show1['tidak_berhasil']; ?></td>
-                                    <td style="border: 1px solid black;text-align:center; font-family: DejaVu Sans;"><?= $show1['butuh_waktu_lama']; ?></td>
-                                </tr>
-                            </tbody>
-                        <?php endif; ?>
+                    foreach ($action_planpeserta as $show) : ?>
+                        <tbody style="text-align: left;" style="border: 1px solid black;">
+                            <tr>
+                                <th style="border: 1px solid black;"><?= $nomor++ ?></th>
+                                <td style="border: 1px solid black;"><?= $show['action_plan']; ?></td>
+                                <td style="border: 1px solid black;text-align:center; font-family: DejaVu Sans;"><?= $show['berhasil']; ?></td>
+                                <td style="border: 1px solid black;text-align:center; font-family: DejaVu Sans;"><?= $show['tidak_berhasil']; ?></td>
+                                <td style="border: 1px solid black;text-align:center; font-family: DejaVu Sans;"><?= $show['butuh_waktu_lama']; ?></td>
+                            </tr>
+                        </tbody>
                     <?php endforeach; ?>
                 </table>
             </div>
@@ -160,21 +133,17 @@
                 <tbody>
                     <tr>
                         <td style="border: 1px solid black; text-align:left;">
-                            <?php foreach ($join_table as $data_show) : ?>
-                                <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
-                                    <?php if ($data_show['action_plan_mingguke'] == 1) : ?>
-                                        <p><?= nl2br($data_show['deskripsi_coach']); ?></p>
-                                    <?php endif; ?>
-                                <?php endif; ?>
+                            <?php foreach ($action_show as $data) : ?>
+                                <p>
+                                    <?= nl2br($data['deskripsi_coach']); ?>
+                                </p>
                             <?php endforeach; ?>
                         </td>
                         <td style="border: 1px solid black; text-align:left;">
-                            <?php foreach ($join_table as $data_show) : ?>
-                                <?php if ($data_show['id_user'] == $data_actionplan1['id_user']) : ?>
-                                    <?php if ($data_show['action_plan_mingguke'] == 1) : ?>
-                                        <p><?= nl2br($data_show['result_coach']); ?></p>
-                                    <?php endif; ?>
-                                <?php endif; ?>
+                            <?php foreach ($action_show as $data) : ?>
+                                <p>
+                                    <?= nl2br($data['result_coach']); ?>
+                                </p>
                             <?php endforeach; ?>
                         </td>
                     </tr>

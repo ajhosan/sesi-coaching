@@ -32,31 +32,33 @@ class Cetaklaporan extends CI_Controller
         $this->load->view('coach/laporan_pdf', $data);
     }
 
-    public function laporan_pdf($id_user)
+    public function laporan_pdf($id_goals, $sesi_ke, $id_user)
     {
-
+        $data2 = $this->db->get_where('user', ['email_user' => $this->session->userdata('email')])->row_array();
+        $data3 = $this->m_goals->goal_persesi($id_goals)->row_array();
+        $data4 = $this->m_actionplan->show_tbl_goals($id_goals)->row_array();
+        $data5 = $this->m_actionplan->data_showkomentarcoach($id_goals, $sesi_ke, $id_user)->result_array();
+        $data6 = $this->m_goals->edit_data_actionplan($id_goals, $sesi_ke)->result_array();
         $data1 = $this->m_actionplan->lihat_data($id_user)->row_array();
-        $data2 = $this->m_goals->read_data()->result_array();
-        $data3 = $this->m_actionplan->read_data()->result_array();
-        $data4 = $this->m_actionplan->read_data2()->result_array();
-        $data5 = $this->m_actionplan->read_data3()->result_array();
-        $data7 = $this->m_actionplan->read_data4()->result_array();
-        $data8 = $this->m_actionplan->read_data5()->result_array();
-        $data9 = $this->m_actionplan->read_data6()->result_array();
-        $data10 = $this->m_goals->komentar_result($id_user)->row_array();
-        $data6 = $this->m_success_criteria->read_data_success_criteria1()->result_array();
+
+        // $data1 = $this->m_actionplan->lihat_data($id_user)->row_array();
+        // $data2 = $this->m_goals->read_data()->result_array();
+        // $data3 = $this->m_actionplan->read_data()->result_array();
+        // $data4 = $this->m_actionplan->read_data2()->result_array();
+        // $data5 = $this->m_actionplan->read_data3()->result_array();
+        // $data7 = $this->m_actionplan->read_data4()->result_array();
+        // $data8 = $this->m_actionplan->read_data5()->result_array();
+        // $data9 = $this->m_actionplan->read_data6()->result_array();
+        // $data10 = $this->m_goals->komentar_result($id_user)->row_array();
+        // $data6 = $this->m_success_criteria->read_data_success_criteria1()->result_array();
 
         $data = array(
             "data_actionplan1" => $data1,
-            "show_goals" => $data2,
-            "actionplan1" => $data3,
-            "action_plan2" => $data4,
-            "action_plan3" => $data5,
-            "action_plan4" => $data7,
-            "action_plan5" => $data8,
-            "action_plan6" => $data9,
-            "join_table" => $data6,
-            "komentar_result" => $data10
+            "user" => $data2,
+            "goals_user" => $data3,
+            "tbl_goals" => $data4,
+            "action_show" => $data5,
+            "action_planpeserta" => $data6
         );
 
         $id_user = $data1['nama_user'];
