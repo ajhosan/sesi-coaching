@@ -15,10 +15,11 @@
             <input type="text" hidden name="sesi_coaching" value="<?= $tbl_goals['sesi_ke']; ?>">
             <a href="<?= $this->agent->referrer(); ?>" class="btn btn-danger">Kembali ke main menu</a>
             <?php foreach ($action_show as $result) : ?>
-                <?php if ($result['check_status'] == "SELESAI") : ?>
+                <?php if ($result['check_status'] == "Telah menyelesaikan sesi ini") : ?>
                     <h4 style="color: black;" class="float-right">Anda telah menyelesaikan sesi coaching ini, terimakasih</h4>
                 <?php else : ?>
-                    <button type="submit" class="btn btn-primary btn-lg float-right" style="margin-bottom: 2%;">Simpan action plan</button>
+                    <button type="submit" class="btn btn-success btn-lg float-right" name="sesi_selesai" style="margin-bottom: 2%;"> <i class="far fa-check-circle"></i> Simpan, & selesai</button>
+                    <button type="submit" class="btn btn-primary btn-lg float-right" name="sesi_belumselesai" style="margin-bottom: 2%; margin-right:5px;"><i class="fas fa-caret-right"></i> Simpan, & buat sesi baru</button>
                 <?php endif; ?>
             <?php endforeach; ?>
             <div class="table-responsive">
@@ -48,7 +49,7 @@
                                     <div class="mb-3">
                                         <div class="form-floating">
                                             <input type="text" hidden name="id_actionplan<?= $id_goals_number++; ?>" class="form-control" value="<?= $show['id_actionplan']; ?>">
-                                            <input type="text" hidden name="check_progres" class="form-control" value="SELESAI">
+                                            <input type="text" hidden name="check_progres" class="form-control" value="Telah menyelesaikan sesi ini">
                                             <textarea class="form-control" rows="5" name="actionplan<?= $array++; ?>" placeholder="Leave a comment here" id="floatingTextarea"><?= $show['action_plan']; ?></textarea>
                                         </div>
                                     </div>
