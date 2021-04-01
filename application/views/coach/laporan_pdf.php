@@ -43,7 +43,7 @@
                         </tr>
                         <tr>
                             <th style="text-align: left;">
-                                <p>Sesi coaching pada tanggal</p>
+                                <p>Pertemuan coaching pada tanggal</p>
                             </th>
                             <td>
                                 <p>:
@@ -55,12 +55,12 @@
                         </tr>
                         <tr>
                             <th style="text-align: left;">
-                                <p>Sesi coaching yang ke</p>
+                                <p>Pertemuan coaching yang ke</p>
                             </th>
                             <td>
                                 <p>:
                                     <?php foreach ($action_show as $show) : ?>
-                                        <?= $show['sesi_ke']; ?>
+                                        <?= $show['pertemuan_ke']; ?>
                                     <?php endforeach; ?>
                                 </p>
                             </td>
