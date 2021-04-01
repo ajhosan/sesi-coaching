@@ -297,203 +297,272 @@ class Home extends CI_Controller
         $field_iduser = $this->input->post('user_id');
 
 
-        if ($this->input->post('tanggal_pertemuan_skrng') == $data_pertemuan['tanggal_pertemuan']) {
-
-            $data_actionplan = [
-                array(
-                    'action_plan' => $this->input->post('actionplan1'),
-                    'date_created' => date('Y-m-d'),
-                    'sesi_ke' => $total_sesi_coaching,
-                    'success_criteria' => $field_successcriteria,
-                    'id_goals' => $field_id_goals,
-                    'berhasil' => $this->input->post('berhasil2'),
-                    'tidak_berhasil' => $this->input->post('tidak_berhasil3'),
-                    'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama4'),
-                    'pertemuan_ke' => $pertemuan,
-                    'id_user' => $field_iduser
-                ),
-                array(
-                    'action_plan' => $this->input->post('actionplan5'),
-                    'date_created' => date('Y-m-d'),
-                    'sesi_ke' => $total_sesi_coaching,
-                    'success_criteria' => $field_successcriteria,
-                    'id_goals' => $field_id_goals,
-                    'berhasil' => $this->input->post('berhasil6'),
-                    'tidak_berhasil' => $this->input->post('tidak_berhasil7'),
-                    'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama8'),
-                    'pertemuan_ke' => $pertemuan,
-                    'id_user' => $field_iduser
-                ),
-                array(
-                    'action_plan' => $this->input->post('actionplan9'),
-                    'date_created' => date('Y-m-d'),
-                    'sesi_ke' => $total_sesi_coaching,
-                    'success_criteria' => $field_successcriteria,
-                    'id_goals' => $field_id_goals,
-                    'berhasil' => $this->input->post('berhasil10'),
-                    'tidak_berhasil' => $this->input->post('tidak_berhasil11'),
-                    'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama12'),
-                    'pertemuan_ke' => $pertemuan,
-                    'id_user' => $field_iduser
-                ),
-                array(
-                    'action_plan' => $this->input->post('actionplan13'),
-                    'date_created' => date('Y-m-d'),
-                    'sesi_ke' => $total_sesi_coaching,
-                    'success_criteria' => $field_successcriteria,
-                    'id_goals' => $field_id_goals,
-                    'berhasil' => $this->input->post('berhasil14'),
-                    'tidak_berhasil' => $this->input->post('tidak_berhasil15'),
-                    'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama16'),
-                    'pertemuan_ke' => $pertemuan,
-                    'id_user' => $field_iduser
-                ),
-                array(
-                    'action_plan' => $this->input->post('actionplan17'),
-                    'date_created' => date('Y-m-d'),
-                    'sesi_ke' => $total_sesi_coaching,
-                    'success_criteria' => $field_successcriteria,
-                    'id_goals' => $field_id_goals,
-                    'berhasil' => $this->input->post('berhasil18'),
-                    'tidak_berhasil' => $this->input->post('tidak_berhasil19'),
-                    'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama20'),
-                    'pertemuan_ke' => $pertemuan,
-                    'id_user' => $field_iduser
-                )
-            ];
-
+        if ($this->input->post('sesi_selesai')) {
             $update_status_action_plan = [
                 array(
                     'id_actionplan' => $this->input->post('id_actionplan1'),
+                    'berhasil' => $this->input->post('berhasil2'),
+                    'tidak_berhasil' => $this->input->post('tidak_berhasil3'),
+                    'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama4'),
                     'check_status' =>  $this->input->post('check_progres')
                 ),
                 array(
                     'id_actionplan' => $this->input->post('id_actionplan2'),
+                    'berhasil' => $this->input->post('berhasil6'),
+                    'tidak_berhasil' => $this->input->post('tidak_berhasil7'),
+                    'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama8'),
                     'check_status' =>  $this->input->post('check_progres')
                 ),
                 array(
                     'id_actionplan' => $this->input->post('id_actionplan3'),
+                    'berhasil' => $this->input->post('berhasil10'),
+                    'tidak_berhasil' => $this->input->post('tidak_berhasil11'),
+                    'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama12'),
                     'check_status' =>  $this->input->post('check_progres')
                 ),
                 array(
                     'id_actionplan' => $this->input->post('id_actionplan4'),
+                    'berhasil' => $this->input->post('berhasil14'),
+                    'tidak_berhasil' => $this->input->post('tidak_berhasil15'),
+                    'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama16'),
                     'check_status' =>  $this->input->post('check_progres')
                 ),
                 array(
                     'id_actionplan' => $this->input->post('id_actionplan5'),
+                    'berhasil' => $this->input->post('berhasil18'),
+                    'tidak_berhasil' => $this->input->post('tidak_berhasil19'),
+                    'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama20'),
                     'check_status' =>  $this->input->post('check_progres')
                 )
             ];
 
-            // $id_goals = $field_id_goals;
-            // $data2 = [
-            //     'sesi_ke' => $total_sesi_coaching,
-            //     'pertemuan_ke' => $pertemuan
-            // ];
-
-            $id_user = $field_iduser;
-            $data3 = [
-                'pertemuan_ke' => $pertemuan,
-                'tanggal_pertemuan' => date('Y-m-d')
-
-            ];
-
-
-            $this->db->insert_batch('action_plan', $data_actionplan);
-
-
             $this->db->update_batch('action_plan', $update_status_action_plan, 'id_actionplan');
 
-            // $this->db->where('id_goals', $id_goals);
-            // $this->db->update('goals', $data2);
-
-            $this->db->where('id_user', $id_user);
-            $this->db->update('user', $data3);
             redirect('coaches/transisi_sesi/lihat_isigoals/' . $field_id_goals);
         } else {
-            $data_actionplan = [
-                array(
-                    'action_plan' => $this->input->post('actionplan1'),
-                    'date_created' => date('Y-m-d'),
-                    'sesi_ke' => $total_sesi_coaching,
-                    'success_criteria' => $field_successcriteria,
-                    'id_goals' => $field_id_goals,
-                    'berhasil' => $this->input->post('berhasil2'),
-                    'tidak_berhasil' => $this->input->post('tidak_berhasil3'),
-                    'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama4'),
-                    'pertemuan_ke' => $tambah_pertemuan,
-                    'id_user' => $field_iduser
-                ),
-                array(
-                    'action_plan' => $this->input->post('actionplan5'),
-                    'date_created' => date('Y-m-d'),
-                    'sesi_ke' => $total_sesi_coaching,
-                    'success_criteria' => $field_successcriteria,
-                    'id_goals' => $field_id_goals,
-                    'berhasil' => $this->input->post('berhasil6'),
-                    'tidak_berhasil' => $this->input->post('tidak_berhasil7'),
-                    'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama8'),
-                    'pertemuan_ke' => $tambah_pertemuan,
-                    'id_user' => $field_iduser
-                ),
-                array(
-                    'action_plan' => $this->input->post('actionplan9'),
-                    'date_created' => date('Y-m-d'),
-                    'sesi_ke' => $total_sesi_coaching,
-                    'success_criteria' => $field_successcriteria,
-                    'id_goals' => $field_id_goals,
-                    'berhasil' => $this->input->post('berhasil10'),
-                    'tidak_berhasil' => $this->input->post('tidak_berhasil11'),
-                    'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama12'),
-                    'pertemuan_ke' => $tambah_pertemuan,
-                    'id_user' => $field_iduser
-                ),
-                array(
-                    'action_plan' => $this->input->post('actionplan13'),
-                    'date_created' => date('Y-m-d'),
-                    'sesi_ke' => $total_sesi_coaching,
-                    'success_criteria' => $field_successcriteria,
-                    'id_goals' => $field_id_goals,
-                    'berhasil' => $this->input->post('berhasil14'),
-                    'tidak_berhasil' => $this->input->post('tidak_berhasil15'),
-                    'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama16'),
-                    'pertemuan_ke' => $tambah_pertemuan,
-                    'id_user' => $field_iduser
-                ),
-                array(
-                    'action_plan' => $this->input->post('actionplan17'),
-                    'date_created' => date('Y-m-d'),
-                    'sesi_ke' => $total_sesi_coaching,
-                    'success_criteria' => $field_successcriteria,
-                    'id_goals' => $field_id_goals,
-                    'berhasil' => $this->input->post('berhasil18'),
-                    'tidak_berhasil' => $this->input->post('tidak_berhasil19'),
-                    'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama20'),
-                    'pertemuan_ke' => $tambah_pertemuan,
-                    'id_user' => $field_iduser
-                )
-            ];
+            if ($this->input->post('tanggal_pertemuan_skrng') == $data_pertemuan['tanggal_pertemuan']) {
 
-            $id_goals = $field_id_goals;
-            $data2 = [
-                'sesi_ke' => $total_sesi_coaching,
-                'pertemuan_ke' => $tambah_pertemuan
-            ];
+                $data_actionplan = [
+                    array(
+                        'action_plan' => $this->input->post('actionplan1'),
+                        'date_created' => date('Y-m-d'),
+                        'sesi_ke' => $total_sesi_coaching,
+                        'success_criteria' => $field_successcriteria,
+                        'id_goals' => $field_id_goals,
+                        'pertemuan_ke' => $pertemuan,
+                        'id_user' => $field_iduser
+                    ),
+                    array(
+                        'action_plan' => $this->input->post('actionplan5'),
+                        'date_created' => date('Y-m-d'),
+                        'sesi_ke' => $total_sesi_coaching,
+                        'success_criteria' => $field_successcriteria,
+                        'id_goals' => $field_id_goals,
+                        'pertemuan_ke' => $pertemuan,
+                        'id_user' => $field_iduser
+                    ),
+                    array(
+                        'action_plan' => $this->input->post('actionplan9'),
+                        'date_created' => date('Y-m-d'),
+                        'sesi_ke' => $total_sesi_coaching,
+                        'success_criteria' => $field_successcriteria,
+                        'id_goals' => $field_id_goals,
+                        'pertemuan_ke' => $pertemuan,
+                        'id_user' => $field_iduser
+                    ),
+                    array(
+                        'action_plan' => $this->input->post('actionplan13'),
+                        'date_created' => date('Y-m-d'),
+                        'sesi_ke' => $total_sesi_coaching,
+                        'success_criteria' => $field_successcriteria,
+                        'id_goals' => $field_id_goals,
+                        'pertemuan_ke' => $pertemuan,
+                        'id_user' => $field_iduser
+                    ),
+                    array(
+                        'action_plan' => $this->input->post('actionplan17'),
+                        'date_created' => date('Y-m-d'),
+                        'sesi_ke' => $total_sesi_coaching,
+                        'success_criteria' => $field_successcriteria,
+                        'id_goals' => $field_id_goals,
+                        'pertemuan_ke' => $pertemuan,
+                        'id_user' => $field_iduser
+                    )
+                ];
 
-            $id_user = $field_iduser;
-            $data3 = [
-                'pertemuan_ke' => $tambah_pertemuan,
-                'tanggal_pertemuan' => date('Y-m-d')
-            ];
+                $update_status_action_plan = [
+                    array(
+                        'id_actionplan' => $this->input->post('id_actionplan1'),
+                        'berhasil' => $this->input->post('berhasil2'),
+                        'tidak_berhasil' => $this->input->post('tidak_berhasil3'),
+                        'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama4'),
+                        'check_status' =>  $this->input->post('check_progres')
+                    ),
+                    array(
+                        'id_actionplan' => $this->input->post('id_actionplan2'),
+                        'berhasil' => $this->input->post('berhasil6'),
+                        'tidak_berhasil' => $this->input->post('tidak_berhasil7'),
+                        'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama8'),
+                        'check_status' =>  $this->input->post('check_progres')
+                    ),
+                    array(
+                        'id_actionplan' => $this->input->post('id_actionplan3'),
+                        'berhasil' => $this->input->post('berhasil10'),
+                        'tidak_berhasil' => $this->input->post('tidak_berhasil11'),
+                        'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama12'),
+                        'check_status' =>  $this->input->post('check_progres')
+                    ),
+                    array(
+                        'id_actionplan' => $this->input->post('id_actionplan4'),
+                        'berhasil' => $this->input->post('berhasil14'),
+                        'tidak_berhasil' => $this->input->post('tidak_berhasil15'),
+                        'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama16'),
+                        'check_status' =>  $this->input->post('check_progres')
+                    ),
+                    array(
+                        'id_actionplan' => $this->input->post('id_actionplan5'),
+                        'berhasil' => $this->input->post('berhasil18'),
+                        'tidak_berhasil' => $this->input->post('tidak_berhasil19'),
+                        'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama20'),
+                        'check_status' =>  $this->input->post('check_progres')
+                    )
+                ];
 
-            $this->db->insert_batch('action_plan', $data_actionplan);
+                $id_goals = $field_id_goals;
+                $data2 = [
+                    'sesi_ke' => $total_sesi_coaching,
+                    'pertemuan_ke' => $pertemuan
+                ];
 
-            $this->db->where('id_goals', $id_goals);
-            $this->db->update('goals', $data2);
+                $id_user = $field_iduser;
+                $data3 = [
+                    'pertemuan_ke' => $pertemuan,
+                    'tanggal_pertemuan' => date('Y-m-d')
 
-            $this->db->where('id_user', $id_user);
-            $this->db->update('user', $data3);
-            redirect('coaches/transisi_sesi/lihat_isigoals/' . $field_id_goals);
+                ];
+
+
+                $this->db->insert_batch('action_plan', $data_actionplan);
+
+
+                $this->db->update_batch('action_plan', $update_status_action_plan, 'id_actionplan');
+
+                $this->db->where('id_goals', $id_goals);
+                $this->db->update('goals', $data2);
+
+                $this->db->where('id_user', $id_user);
+                $this->db->update('user', $data3);
+                redirect('coaches/transisi_sesi/lihat_isigoals/' . $field_id_goals);
+            } else {
+                $data_actionplan = [
+                    array(
+                        'action_plan' => $this->input->post('actionplan1'),
+                        'date_created' => date('Y-m-d'),
+                        'sesi_ke' => $total_sesi_coaching,
+                        'success_criteria' => $field_successcriteria,
+                        'id_goals' => $field_id_goals,
+                        'pertemuan_ke' => $tambah_pertemuan,
+                        'id_user' => $field_iduser
+                    ),
+                    array(
+                        'action_plan' => $this->input->post('actionplan5'),
+                        'date_created' => date('Y-m-d'),
+                        'sesi_ke' => $total_sesi_coaching,
+                        'success_criteria' => $field_successcriteria,
+                        'id_goals' => $field_id_goals,
+                        'pertemuan_ke' => $tambah_pertemuan,
+                        'id_user' => $field_iduser
+                    ),
+                    array(
+                        'action_plan' => $this->input->post('actionplan9'),
+                        'date_created' => date('Y-m-d'),
+                        'sesi_ke' => $total_sesi_coaching,
+                        'success_criteria' => $field_successcriteria,
+                        'id_goals' => $field_id_goals,
+                        'pertemuan_ke' => $tambah_pertemuan,
+                        'id_user' => $field_iduser
+                    ),
+                    array(
+                        'action_plan' => $this->input->post('actionplan13'),
+                        'date_created' => date('Y-m-d'),
+                        'sesi_ke' => $total_sesi_coaching,
+                        'success_criteria' => $field_successcriteria,
+                        'id_goals' => $field_id_goals,
+                        'pertemuan_ke' => $tambah_pertemuan,
+                        'id_user' => $field_iduser
+                    ),
+                    array(
+                        'action_plan' => $this->input->post('actionplan17'),
+                        'date_created' => date('Y-m-d'),
+                        'sesi_ke' => $total_sesi_coaching,
+                        'success_criteria' => $field_successcriteria,
+                        'id_goals' => $field_id_goals,
+                        'pertemuan_ke' => $tambah_pertemuan,
+                        'id_user' => $field_iduser
+                    )
+                ];
+
+                $update_status_action_plan = [
+                    array(
+                        'id_actionplan' => $this->input->post('id_actionplan1'),
+                        'berhasil' => $this->input->post('berhasil2'),
+                        'tidak_berhasil' => $this->input->post('tidak_berhasil3'),
+                        'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama4'),
+                        'check_status' =>  $this->input->post('check_progres')
+                    ),
+                    array(
+                        'id_actionplan' => $this->input->post('id_actionplan2'),
+                        'berhasil' => $this->input->post('berhasil6'),
+                        'tidak_berhasil' => $this->input->post('tidak_berhasil7'),
+                        'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama8'),
+                        'check_status' =>  $this->input->post('check_progres')
+                    ),
+                    array(
+                        'id_actionplan' => $this->input->post('id_actionplan3'),
+                        'berhasil' => $this->input->post('berhasil10'),
+                        'tidak_berhasil' => $this->input->post('tidak_berhasil11'),
+                        'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama12'),
+                        'check_status' =>  $this->input->post('check_progres')
+                    ),
+                    array(
+                        'id_actionplan' => $this->input->post('id_actionplan4'),
+                        'berhasil' => $this->input->post('berhasil14'),
+                        'tidak_berhasil' => $this->input->post('tidak_berhasil15'),
+                        'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama16'),
+                        'check_status' =>  $this->input->post('check_progres')
+                    ),
+                    array(
+                        'id_actionplan' => $this->input->post('id_actionplan5'),
+                        'berhasil' => $this->input->post('berhasil18'),
+                        'tidak_berhasil' => $this->input->post('tidak_berhasil19'),
+                        'butuh_waktu_lama' => $this->input->post('butuh_waktu_lama20'),
+                        'check_status' =>  $this->input->post('check_progres')
+                    )
+                ];
+
+                $id_goals = $field_id_goals;
+                $data2 = [
+                    'sesi_ke' => $total_sesi_coaching,
+                    'pertemuan_ke' => $tambah_pertemuan
+                ];
+
+                $id_user = $field_iduser;
+                $data3 = [
+                    'pertemuan_ke' => $tambah_pertemuan,
+                    'tanggal_pertemuan' => date('Y-m-d')
+                ];
+
+                $this->db->insert_batch('action_plan', $data_actionplan);
+
+                $this->db->update_batch('action_plan', $update_status_action_plan, 'id_actionplan');
+
+                $this->db->where('id_goals', $id_goals);
+                $this->db->update('goals', $data2);
+
+                $this->db->where('id_user', $id_user);
+                $this->db->update('user', $data3);
+                redirect('coaches/transisi_sesi/lihat_isigoals/' . $field_id_goals);
+            }
         }
     }
 

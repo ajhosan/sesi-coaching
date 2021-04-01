@@ -70,33 +70,13 @@
                                         <?php $validasi_onprogress = $show['progres_coaching'];
                                         $not_active = $validasi_onprogress == $show['id_user'];
                                         ?>
-                                        <?php if ($validasi_onprogress == "PERSETUJUAN") : ?>
-                                            <td>
-                                                <form method="POST" action="<?= base_url('coaches/home/request_permintaan_coaching') ?>">
-                                                    <input type="text" hidden name="id_goals" value="<?= $show['id_goals'] ?>">
-                                                    <input type="text" hidden name="progres_coaching" value="PENDING">
-                                                    <button class="btn btn-info">Saya ingin melakukan coaching di goal ini</button>
-                                                </form>
 
-                                            </td>
-                                        <?php elseif ($validasi_onprogress == "PENDING") : ?>
+                                        <?php if ($validasi == TRUE) : ?>
                                             <td>
-                                                <p style="color:green;">Permintaan Anda telah disampaikan kepada coach, harap tunggu sampai permintaan Anda di Acc</p>
+                                                <a href="<?= base_url(); ?>coaches/home/form_action_plan/<?= $show['id_goals']; ?>" class="btn btn-primary">Tambah Action Plan</a>
                                             </td>
-                                        <?php elseif ($validasi_onprogress == "PROSES") : ?>
-                                            <td>
-                                                <p style="color: #2043E5;">Selamat permintaan Anda diterima, saat ini Anda sedang melakukan coaching di goals ini</p>
-                                                <?php if ($validasi == TRUE) : ?>
-                                                    <a href="<?= base_url(); ?>coaches/home/form_action_plan/<?= $show['id_goals']; ?>" class="btn btn-primary">Tambah Action Plan</a>
-
-                                                <?php else : ?>
-                                                    <p class="badge badge-success">Terimakasih telah mengisi <b>Action Plan</b></p>
-                                                <?php endif; ?>
-                                            </td>
-                                        <?php elseif ($validasi_onprogress == "DONE") : ?>
-                                            <td>
-                                                <a href="<?= base_url(); ?>coaches/home/form_action_plan/<?= $show['id_goals'] ?>">ON PROGRES</a>
-                                            </td>
+                                        <?php else : ?>
+                                            <td><a style="color: white; background-color:green; padding:4px; border-radius:5px;">Terimakasih Telah Mengisi Data</a></td>
                                         <?php endif; ?>
 
                                     </tr>
