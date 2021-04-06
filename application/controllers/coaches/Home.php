@@ -296,7 +296,6 @@ class Home extends CI_Controller
         $field_butuh_waktu = $this->input->post('butuh_waktu_lama');
         $field_iduser = $this->input->post('user_id');
 
-
         if ($this->input->post('sesi_selesai')) {
             $update_status_action_plan = [
                 array(
@@ -430,8 +429,7 @@ class Home extends CI_Controller
 
                 $id_goals = $field_id_goals;
                 $data2 = [
-                    'sesi_ke' => $total_sesi_coaching,
-                    'pertemuan_ke' => $pertemuan
+                    'sesi_ke' => $total_sesi_coaching
                 ];
 
                 $id_user = $field_iduser;
@@ -542,8 +540,7 @@ class Home extends CI_Controller
 
                 $id_goals = $field_id_goals;
                 $data2 = [
-                    'sesi_ke' => $total_sesi_coaching,
-                    'pertemuan_ke' => $tambah_pertemuan
+                    'sesi_ke' => $total_sesi_coaching
                 ];
 
                 $id_user = $field_iduser;

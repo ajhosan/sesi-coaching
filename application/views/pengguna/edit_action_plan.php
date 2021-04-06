@@ -18,8 +18,8 @@
                 <?php if ($result['check_status'] == "Telah menyelesaikan sesi ini") : ?>
                     <h4 style="color: black;" class="float-right">Anda telah menyelesaikan sesi coaching ini, terimakasih</h4>
                 <?php else : ?>
-                    <button type="submit" class="btn btn-success btn-lg float-right" name="sesi_selesai" style="margin-bottom: 2%;"> <i class="far fa-check-circle"></i> Simpan, & selesai</button>
-                    <button type="submit" class="btn btn-primary btn-lg float-right" name="sesi_belumselesai" style="margin-bottom: 2%; margin-right:5px;"><i class="fas fa-caret-right"></i> Simpan, & buat sesi baru</button>
+                    <button type="submit" class="btn btn-success btn-lg float-right" name="sesi_selesai" value="sesi_selesai" style="margin-bottom: 2%;"> <i class="far fa-check-circle"></i> Simpan, & selesai</button>
+                    <button type="submit" class="btn btn-primary btn-lg float-right" name="sesi_belumselesai" value="sesi_belumselesai" style="margin-bottom: 2%; margin-right:5px;"><i class="fas fa-caret-right"></i> Simpan, & buat sesi baru</button>
                 <?php endif; ?>
             <?php endforeach; ?>
             <div class="table-responsive">
