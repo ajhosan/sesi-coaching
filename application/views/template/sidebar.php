@@ -24,6 +24,11 @@
                     <span>Goals & Action Plan</span></a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fab fa-wpforms"></i>
+                    <span>Form Coaching</span></a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('coaches/user/changePassword') ?>">
                     <i class="fas fa-key"></i>
                     <span>Ganti Password</span></a>
