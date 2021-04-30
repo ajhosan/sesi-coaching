@@ -24,7 +24,7 @@
                     <span>Goals & Action Plan</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="<?= base_url('coaches/form_coaching') ?>">
                     <i class="fab fa-wpforms"></i>
                     <span>Form Coaching</span></a>
             </li>
