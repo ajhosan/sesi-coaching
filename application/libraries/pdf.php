@@ -50,6 +50,8 @@ class Pdf extends Dompdf
         $this->load_html($html);
         // Render the PDF
         $this->render();
+        // Fitur baru
+        ob_end_clean();
         // Output the generated PDF to Browser
         $this->stream($this->filename, array("Attachment" => false));
     }

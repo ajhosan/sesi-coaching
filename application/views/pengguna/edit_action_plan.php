@@ -16,12 +16,14 @@
             <a href="<?= $this->agent->referrer(); ?>" class="btn btn-danger">Kembali ke main menu</a>
             <?php foreach ($action_show as $result) : ?>
                 <?php if ($result['check_status'] == "Telah menyelesaikan sesi ini") : ?>
-                    <h4 style="color: black;" class="float-right">Anda telah menyelesaikan sesi coaching ini, terimakasih</h4>
+                    <a href="<?= base_url() ?>coaches/cetaklaporancoachee/laporan_pdf/<?= $result['id_goals']; ?>/<?= $result['sesi_ke']; ?>/<?= $user['id_user'] ?>" class="btn btn-primary float-right" style="margin-left:1%; margin-bottom:1%;" target="_blank"><i class="fas fa-print"></i> Print PDF</a>
+                    <h5 style="color: white;" class="badge badge-success float-right">Anda telah menyelesaikan sesi coaching ini, terimakasih</h5>
                 <?php else : ?>
                     <button type="submit" class="btn btn-success btn-lg float-right" name="sesi_selesai" value="sesi_selesai" style="margin-bottom: 2%;"> <i class="far fa-check-circle"></i> Simpan, & selesai</button>
                     <button type="submit" class="btn btn-primary btn-lg float-right" name="sesi_belumselesai" value="sesi_belumselesai" style="margin-bottom: 2%; margin-right:5px;"><i class="fas fa-caret-right"></i> Simpan, & buat sesi baru</button>
                 <?php endif; ?>
             <?php endforeach; ?>
+
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead style="text-align: center;">
