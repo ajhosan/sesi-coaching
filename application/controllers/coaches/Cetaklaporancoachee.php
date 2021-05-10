@@ -45,6 +45,7 @@ class Cetaklaporancoachee extends CI_Controller
         $data5 = $this->m_actionplan->data_showkomentarcoach($id_goals, $sesi_ke, $id_user)->result_array();
         $data6 = $this->m_goals->edit_data_actionplan($id_goals, $sesi_ke)->result_array();
         $data1 = $this->db->get_where('user', ['email_user' => $this->session->userdata('email')])->row_array();
+        $datasesi = $this->m_goals->edit_data_actionplan_datasesi($id_goals, $sesi_ke)->row_array();
 
         $data = array(
             "data_actionplan1" => $data1,
@@ -56,12 +57,14 @@ class Cetaklaporancoachee extends CI_Controller
         );
 
         $id_user = $data1['nama_user'];
-        $id_sesi = $data6['sesi_ke'];
+        $id_sesi = $datasesi;
+
+
 
         $this->load->library('pdf');
 
         $this->pdf->setPaper('A4', 'potrait');
-        $this->pdf->filename = "Laporan coaching " .  $id_user . " .pdf";
+        $this->pdf->filename = "Laporan coaching " .  $id_user . " pertemuan ke " . $id_sesi['pertemuan_ke'] . " sesi ke " . $id_sesi['sesi_ke'] . ".pdf";
         $this->pdf->load_view('pengguna/print_laporan/print_actionplan', $data);
     }
 }
