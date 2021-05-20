@@ -33,11 +33,17 @@
                     <i class="fas fa-key"></i>
                     <span>Ganti Password</span></a>
             </li>
-        <?php else : ?>
+        <?php elseif ($user['id_role'] == 2) : ?>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('coach/coachcontroller/index') ?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard Coach</span></a>
+            </li>
+        <?php elseif ($user['id_role'] == 3) : ?>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('menu/view_user') ?>">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard Admin</span></a>
             </li>
         <?php endif; ?>
 
