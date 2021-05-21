@@ -24,6 +24,25 @@ class M_menu_management extends CI_Model
         return $this->db->query($queri)->result_array();
     }
 
+    // Get Data Tbl Coach Name
+    public function coach_name()
+    {
+        $this->db->select('*');
+        $this->db->from('coach_name');
+        return $this->db->get();
+    }
+    // End tbl coach name
+
+
+    // Menampilkan data Tbl Role
+    public function role_akun_data()
+    {
+        $this->db->select('*');
+        $this->db->from('user_role');
+        return $this->db->get();
+    }
+    // End tbl role
+
     public function edit_menu_management($id)
     {
         return $this->db->get_where('user_menu', array('id' => $id));
@@ -34,9 +53,9 @@ class M_menu_management extends CI_Model
         return $this->db->get_where('user_role', array('id' => $id));
     }
 
-    public function edit_data($id)
+    public function edit_data($id_user)
     {
-        return $this->db->get_where('user', array('id' => $id));
+        return $this->db->get_where('user', array('id_user' => $id_user));
     }
 
     // 	Function Tambah Data

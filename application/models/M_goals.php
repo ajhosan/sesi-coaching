@@ -69,6 +69,18 @@ class M_goals extends CI_Model
         return $this->db->get();
     }
 
+
+    public function edit_data_actionplan_datasesi($id_goals, $sesi_ke)
+    {
+        $this->db->select('*');
+        $this->db->from('action_plan');
+        $this->db->where('id_goals', $id_goals);
+        $this->db->where('sesi_ke', $sesi_ke);
+        $this->db->group_by('sesi_ke', $sesi_ke);
+        return $this->db->get();
+    }
+
+
     public function data_action($id_goal)
     {
         $this->db->select('*');

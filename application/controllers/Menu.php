@@ -107,14 +107,14 @@ class Menu extends CI_Controller
         }
     }
 
-    public function view_edit()
+    public function view_edit($id_user)
     {
         $data1['title'] = 'View User';
-        $data1['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data1['user'] = $this->db->get_where('user', ['email_user' => $this->session->userdata('email')])->row_array();
         $id = $this->uri->segment(3);
         $data['viewUser'] = $this->menu->getUserData();
         $data['menus'] = $this->db->get('user_role')->result_array();
-        $data['kode1'] = $this->menu->edit_data($id)->row_array();
+        $data['kode1'] = $this->menu->edit_data($id_user)->row_array();
         $this->load->view('header', $data1);
         $this->load->view('sidebar', $data1);
         $this->load->view('template/topbar', $data1);
@@ -219,20 +219,16 @@ class Menu extends CI_Controller
 
         $data1['viewUser'] = $this->menu->getUserData();
         $data1['menus'] = $this->db->get('user_role')->result_array();
+        $data1['categori_coach'] = $this->menu->coach_name()->result_array();
+        $data1['role_id'] = $this->menu->role_akun_data()->result_array();
+        $data1['list_coach'] = $this->m_coach_name->read_data()->result_array();
+        $data1['detail_coachname'] = $this->m_coach_name->read_data()->result_array();
 
-        if ($this->form_validation->run() == false) {
-            $this->load->view('template/header', $data1);
-            $this->load->view('template/sidebar', $data1);
-            $this->load->view('template/topbar', $data1);
-            $this->load->view('admin/index', $data1);
-            $this->load->view('template/footer');
-
-
-            // $this->load->view('template/header_tabel', $data1);
-            // $this->load->view('sidebar', $data1);
-            // $this->load->view('template/topbar', $data1);
-            // $this->load->view('menu/user_info', $data1);
-        }
+        $this->load->view('template/header', $data1);
+        $this->load->view('template/sidebar', $data1);
+        $this->load->view('template/topbar', $data1);
+        $this->load->view('admin/index', $data1);
+        $this->load->view('template/footer');
     }
 
 
@@ -258,18 +254,35 @@ class Menu extends CI_Controller
             $this->load->view('auth/register', $data);
         } else {
             $email = $this->input->post('email', true);
-            $data = [
-                'nama_user' => htmlspecialchars($this->input->post('nama_lengkap'), true),
-                'email_user' => htmlspecialchars($email),
-                'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-                'id_role' =>  1,
-                /**$this->input->post('parameter'),**/
-                'is_active' => 1,
-                'date_created' => time()
-            ];
+            if ($this->input->post('input_coach')) {
+                $data = [
+                    'nama_user' => htmlspecialchars($this->input->post('nama_lengkap'), true),
+                    'email_user' => htmlspecialchars($email),
+                    'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+                    'id_role' =>  $this->input->post('role_akun'),
+                    'id_coach' => $this->input->post('input_coach'),
+                    /**$this->input->post('parameter'),**/
+                    'is_active' => 1,
+                    'date_created' => time()
+                ];
 
 
-            $this->db->insert('user', $data);
+                $this->db->insert('user', $data);
+            } else {
+                $data = [
+                    'nama_user' => htmlspecialchars($this->input->post('nama_lengkap'), true),
+                    'email_user' => htmlspecialchars($email),
+                    'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+                    'id_role' =>  $this->input->post('role_akun'),
+                    /**$this->input->post('parameter'),**/
+                    'is_active' => 1,
+                    'date_created' => time()
+                ];
+
+
+                $this->db->insert('user', $data);
+            }
+
 
 
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Selamat akun Anda telah terdaftar. Harap cek Email Anda, untuk aktivasi akun Anda!!!</div>');
