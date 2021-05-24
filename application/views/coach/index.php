@@ -18,7 +18,7 @@
                                     <?php
                                     $no = 1;
                                     foreach ($record as $show) : ?>
-                                        <?php if ($show['id_role'] == 1) : ?>
+                                        <?php if ($show['id_role'] == 1 && $show['id_coach']) : ?>
                                             <tbody>
                                                 <tr>
                                                     <td><?= $no++ ?></td>
