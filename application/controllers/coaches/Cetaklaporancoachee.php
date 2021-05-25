@@ -39,7 +39,8 @@ class Cetaklaporancoachee extends CI_Controller
 
     public function laporan_pdf($id_goals, $sesi_ke, $id_user)
     {
-        $data2 = $this->db->get_where('user', ['email_user' => $this->session->userdata('email')])->row_array();
+        // $data2 = $this->db->get_where('user', ['email_user' => $this->session->userdata('email')])->row_array();
+        $data2 = $this->m_user->data_coach($id_user)->row_array();
         $data3 = $this->m_goals->goal_persesi($id_goals)->row_array();
         $data4 = $this->m_actionplan->show_tbl_goals($id_goals)->row_array();
         $data5 = $this->m_actionplan->data_showkomentarcoach($id_goals, $sesi_ke, $id_user)->result_array();

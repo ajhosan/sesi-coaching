@@ -118,7 +118,7 @@
                 </table>
             </div>
             <br>
-            <p>Coach Name : <b>Antonius Arif</b></p>
+            <p>Coach Name : <b><?= $user['nama']; ?></b></p>
             <!-- <table width="100%" style="border: 1px solid black;">
                 <thead>
                     <tr>

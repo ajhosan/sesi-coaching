@@ -16,9 +16,22 @@ class M_user extends CI_Model
 
     public function read_data()
     {
+        $id_coach = $this->db->get_where('user', ['email_user' => $this->session->userdata('email')])->row_array();
         $this->db->select('*');
         $this->db->from('user');
+        $this->db->where('id_coach', $id_coach['id_coach']);
         $query = $this->db->get();
+        return $query;
+    }
+
+    public function data_coach($id_user)
+    {
+        $this->db->select('*');
+        $this->db->from('user');
+        $this->db->join('coach_name', 'user.id_coach = coach_name.id_coach', 'inner');
+        $this->db->where('id_user', $id_user);
+        $query = $this->db->get();
+
         return $query;
     }
 }
